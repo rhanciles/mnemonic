@@ -1,0 +1,26 @@
+{
+  "canisters": {
+    "mnem_list_backend": {
+      "main": "src/mnem_list_backend/main.mo",
+      "type": "motoko"
+    },
+    "mnem_list_frontend": {
+      "dependencies": [
+        "mnem_list_backend"
+      ],
+      "source": [
+        "src/mnem_list_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "mnem_list_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
