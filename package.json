@@ -14,5 +14,9 @@
   "type": "module",
   "workspaces": [
     "src/mnem_list_frontend"
-  ]
+  ],
+  "dependencies": {
+    "jquery": "^3.7.1",
+    "lit": "^3.1.2"
+  }
 }
