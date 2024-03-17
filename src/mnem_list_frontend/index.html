@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' https://code.jquery.com/ 'unsafe-inline';"
+    />
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <title>mnemonic</title>
   </head>
 
@@ -12,5 +17,12 @@
     <script type="module" src="/src/main.js"></script>
     <!-- Added link to the jQuery library -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+      $(function () {
+        $("#sortable").sortable();
+        $("#sortable").disableSelection();
+      });
+    </script>
   </body>
 </html>
