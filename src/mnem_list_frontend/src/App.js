@@ -2,27 +2,22 @@ import $ from "jquery";
 import { html, render } from "lit";
 import { LitElement, ReactiveElement } from "lit";
 import { mnem_list_backend } from "declarations/mnem_list_backend";
-//import logo from "./logo2.svg";
 
 ReactiveElement.disableWarning?.("migration");
 LitElement.disableWarning?.("change-in-update");
-// MyElement.disableWarning?.("change-in-update");
 
 class App {
-  //greeting = "";
-
   constructor() {
     this.#render();
   }
-
+  //Create function to handle form field entries.
   #handleFormSubmit = async (e) => {
     e.preventDefault();
 
     var mnemListEl = $("#mnem-list");
-
     var mnemItem = $("#mnem-input").val();
 
-    const entry = document.getElementById("mnem-input").value;
+    const entry = mnemItem;
     this.mnemItem = await mnem_list_backend.addEntry(entry);
     this.#render();
 
@@ -54,6 +49,7 @@ class App {
     });
   };
 
+  //Render the HTML entries to load web page.
   #render() {
     let body = html`
       <main class="my-5 mx-auto">
@@ -75,6 +71,8 @@ class App {
         <ul id="mnem-list"></ul>
       </main>
     `;
+
+    //Render the DOM to pick up interactions of the user.
     render(body, document.getElementById("root"));
     document.querySelector("form");
     document.addEventListener("submit", this.#handleFormSubmit);
