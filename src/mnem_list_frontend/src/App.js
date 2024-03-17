@@ -1,5 +1,6 @@
 import $ from "jquery";
 import { html, render } from "lit";
+import { useState, useEffect } from "react";
 import { LitElement, ReactiveElement } from "lit";
 import { mnem_list_backend } from "declarations/mnem_list_backend";
 
@@ -17,13 +18,13 @@ class App {
     var mnemListEl = $("#mnem-list");
     var mnemItem = $("#mnem-input").val();
 
-    const entry = mnemItem;
-    this.mnemItem = await mnem_list_backend.addEntry(entry);
-    this.#render();
+    // const entry = mnemItem;
+    // this.mnemItem = await mnem_list_backend.addEntry(args);
+    // this.#render();
 
     // Insert list of items created dynamically.
     var mnemListItemEl = $(
-      '<li class="flex-row justify-space-between align-center p-2 bg-light text-dark">'
+      '<li class="flex-row justify-space-between align-center ui-state-default p-2 bg-light text-dark">'
     );
 
     mnemListItemEl.text(mnemItem);
@@ -35,17 +36,71 @@ class App {
 
     mnemListItemEl.append(mnemListBtnEl);
 
-    // print to the page
+    // create a dynamic list
     mnemListEl.append(mnemListItemEl);
 
     // clear the form input element
     $('input[name="mnem-input"]').val("");
+
+    //=========================================================
+
+    const { backendActor } = mnem_list_backend;
+    // const [saving, setSaving] = useState(false);
+    // const [entry, setEntry] = useState("");
+
+    //=========================================================
+
+    const formList = async () => {
+      const [saving, setSaving] = useState(false);
+      const [entry, setEntry] = useState("");
+
+      if (backendActor) {
+        try {
+          setSaving(true);
+          let listItem = {
+            mnemItem: entry,
+          };
+          await backendActor.addEntry(listItem);
+          setEntry("");
+          formList();
+        } catch (error) {
+          console.log("Error adding text:", error);
+          setSaving(false);
+        }
+      }
+    };
+
+    // useEffect(() => {
+    //   mnemListEl = backendActor.updateList(entry);
+    // });
+
+    const getEntry = async () => {
+      const [list, setList] = useState([]);
+      try {
+        const res = await backendActor?.getList();
+        if (res) {
+          setList(res);
+        } else if (list) {
+          setList(Iter.toArray(mnemListEl.entries()));
+        }
+      } catch (error) {
+        console.log("Error getting list:", error);
+      }
+    };
+
+    if (backendActor) {
+      getEntry();
+    }
+
+    //=========================================================
 
     var deleteBtn = $(".delete-item-btn");
 
     deleteBtn.on("click", function () {
       // get the parent `<li>` element from button clicked and remove it
       $(this).parent("li").remove();
+
+      //========================================================
     });
   };
 
