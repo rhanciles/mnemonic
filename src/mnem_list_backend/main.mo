@@ -29,12 +29,19 @@ actor {
     storedList.put(args.entry, args);
   };
 
+  public shared query func getList() : async [List] {
+    Iter.toArray(storedList.vals());
+  };
+
   public shared func delEntry(entry : Text) : async () {
     storedList.delete(entry);
   };
 
-  public shared query func getList() : async [List] {
-    Iter.toArray(storedList.vals());
+  public shared func clearAll() : async () {
+    let target = storedList.entries();
+    for ((target, _) in target) {
+      storedList.delete(target);
+    };
   };
 
 };

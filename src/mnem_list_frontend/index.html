@@ -4,25 +4,22 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
+    <!-- <meta
       http-equiv="Content-Security-Policy"
-      content="script-src 'self' https://code.jquery.com/ 'unsafe-inline';"
-    />
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+      content="default-src *; script-src *"
+    /> -->
+    <!-- <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> -->
     <title>mnemonic</title>
   </head>
 
   <body class="bg-dark text-light">
+    <div></div>
     <div id="root"></div>
     <script type="module" src="/src/main.js"></script>
     <!-- Added link to the jQuery library -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script>
-      $(function () {
-        $("#sortable").sortable();
-        $("#sortable").disableSelection();
-      });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> -->
+    <!-- <script src="./src/sortable.js"></script> -->
   </body>
 </html>

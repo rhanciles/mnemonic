@@ -1,8 +1,9 @@
 import $ from "jquery";
+import moment from "moment";
 import { html, render } from "lit";
 import { useState, useEffect } from "react";
 import { LitElement, ReactiveElement } from "lit";
-import { mnem_list_backend } from "declarations/mnem_list_backend";
+import { mnem_list_backend } from "declarations/mnem_list_backend/index.js";
 
 ReactiveElement.disableWarning?.("migration");
 LitElement.disableWarning?.("change-in-update");
@@ -24,7 +25,7 @@ class App {
 
     // Insert list of items created dynamically.
     var mnemListItemEl = $(
-      '<li class="flex-row justify-space-between align-center ui-state-default p-2 bg-light text-dark">'
+      '<li class="flex-row justify-space-between align-center p-2 bg-light text-dark">'
     );
 
     mnemListItemEl.text(mnemItem);
@@ -45,8 +46,6 @@ class App {
     //=========================================================
 
     const { backendActor } = mnem_list_backend;
-    // const [saving, setSaving] = useState(false);
-    // const [entry, setEntry] = useState("");
 
     //=========================================================
 
@@ -71,18 +70,17 @@ class App {
     };
 
     // useEffect(() => {
-    //   mnemListEl = backendActor.updateList(entry);
-    // });
+    //   if (saving) {
+    //     formList(Iter.toArray(mnemListEl.entries()));
+    //     mnemListEl(backendActor.updateList(entry));
+    //   }
+    // }, [mnemListEl]);
 
     const getEntry = async () => {
       const [list, setList] = useState([]);
       try {
-        const res = await backendActor?.getList();
-        if (res) {
-          setList(res);
-        } else if (list) {
-          setList(Iter.toArray(mnemListEl.entries()));
-        }
+        list(await backendActor?.getList());
+        setList(Iter.toArray(mnemListEl.entries()));
       } catch (error) {
         console.log("Error getting list:", error);
       }
@@ -91,6 +89,9 @@ class App {
     if (backendActor) {
       getEntry();
     }
+
+    var currentDate = moment().format("ddd Do MMM YYYY");
+    $("#currentDay").text(currentDate);
 
     //=========================================================
 
@@ -111,7 +112,9 @@ class App {
         <h1>mnemonic</h1>
         <hr />
 
-        <h2>Add an item to the list.</h2>
+        <h2>
+          Add an item to the list.<span class="today" id="currentTime"></span>
+        </h2>
         <form id="mnem-form">
           <input
             type="text"
@@ -120,9 +123,9 @@ class App {
             name="mnem-input"
             placeholder="Enter item details"
           />
-          <button class="btn btn-info" type="submit">Add Item</button>
+          <button class="btn btn-info" type="submit">Add Item</button
+          ><span class="today" id="currentDay"></span>
         </form>
-
         <ul id="mnem-list"></ul>
       </main>
     `;
@@ -133,5 +136,14 @@ class App {
     document.addEventListener("submit", this.#handleFormSubmit);
   }
 }
+
+// Set current time to update dynamically
+var update = function () {
+  var currentTime = moment().format("LTS");
+  $("#currentTime").text(currentTime);
+  setTimeout(update, 1000);
+  // setInterval or setTimeout can be used.
+};
+update();
 
 export default App;
