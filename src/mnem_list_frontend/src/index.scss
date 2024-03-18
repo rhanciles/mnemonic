@@ -244,6 +244,7 @@ body {
     Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: 18px;
   color: #370f0f;
+  background-image: url(/bkgrnd_5550031.jpg);
 }
 
 h1,
@@ -781,7 +782,7 @@ a:hover {
 }
 
 .text-light {
-  color: #d9e9e8;
+  color: #e9d5e8;
 }
 
 .text-dark {
@@ -814,7 +815,8 @@ a:hover {
 }
 
 .bg-light {
-  background-color: #d9e9e8;
+  background-color: #f0e0f0;
+  border-radius: 5px;
 }
 
 .bg-dark {
@@ -904,21 +906,21 @@ a:hover {
 }
 
 .btn.btn-danger {
-  background-color: #e64c66;
+  background-color: #e64cc7;
   color: #ffffff;
 }
 
 .btn.btn-danger:hover {
-  background-color: #ee8294;
+  background-color: #d57cce;
 }
 
 .btn.btn-info {
-  background-color: #1bbc9b;
+  background-color: #7647c0;
   color: #ffffff;
 }
 
 .btn.btn-info:hover {
-  background-color: #31e1bd;
+  background-color: #a789d1;
 }
 
 .btn.btn-light {
@@ -1028,11 +1030,12 @@ form .form-label {
 form .form-input {
   width: 100%;
   padding: 0.75rem;
-  color: #1a1a1a;
+  color: #3a2a5e;
+  font-weight: bold;
   background-color: #ffffff;
   margin: 0.625rem 0;
   font-size: 1.2rem;
-  border: 1px solid #484848;
+  border: 1px solid #695394;
   border-radius: 0.3rem;
 }
 
