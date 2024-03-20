@@ -10,10 +10,10 @@ LitElement.disableWarning?.("change-in-update");
 
 class App {
   constructor() {
-    this.#render();
+    this.render();
   }
   //Create function to handle form field entries.
-  #handleFormSubmit = async (e) => {
+  handleFormSubmit = async (e) => {
     e.preventDefault();
 
     var mnemListEl = $("#mnem-list");
@@ -27,6 +27,10 @@ class App {
     var mnemListItemEl = $(
       '<li class="flex-row justify-space-between align-center p-2 bg-light text-dark">'
     );
+
+    // var listId = 0;
+    // listId = mnemListItemEl.attr("id");
+    // listId += 1;
 
     mnemListItemEl.text(mnemItem);
 
@@ -106,7 +110,7 @@ class App {
   };
 
   //Render the HTML entries to load web page.
-  #render() {
+  render() {
     let body = html`
       <main class="my-5 mx-auto">
         <h1>mnemonic</h1>
@@ -133,7 +137,7 @@ class App {
     //Render the DOM to pick up interactions of the user.
     render(body, document.getElementById("root"));
     document.querySelector("form");
-    document.addEventListener("submit", this.#handleFormSubmit);
+    document.addEventListener("submit", this.handleFormSubmit);
   }
 }
 
